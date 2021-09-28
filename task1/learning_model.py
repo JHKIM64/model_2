@@ -17,6 +17,7 @@ data_PM25 = t_PM25.get_one_loc_tensor(37.26,125.57,"20200201-20200229", "TS,U10M
 X = data_PM25
 Y = data_PM25.iloc[:,0:1]
 
+print(data_PM25.info)
 
 mm = MinMaxScaler()
 ss = StandardScaler()
@@ -111,6 +112,7 @@ dataY_plot = mm.inverse_transform(dataY_plot)
 plt.figure(figsize=(10,6))
 plt.axvline(x=624, c='r', linestyle='--') #size of the training set
 
+print("RMSE",metrics.mean_squared_error(dataY_plot,data_predict)**0.5)
 plt.plot(dataY_plot, label='Actual Data')
 plt.plot(data_predict, label='Predicted Data')
 plt.title('Time-Series Prediction')
